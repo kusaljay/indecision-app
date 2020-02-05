@@ -1,5 +1,5 @@
-## Installations
+# Installations
 
-# Live-server
+## Live-server
 
-# Babel-cli
+## Babel-cli
