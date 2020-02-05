@@ -38,10 +38,13 @@ const templateTwo = (
   </div>
 );
 
+/* ***** Counter ***** */
+
 let count = 0;
 const addOne = () => {
   count++;
   console.log('Increase by one', count);
+  renderCounterApp();
 }
 const minusOne = () => {
   console.log('Decrease by one');
@@ -50,14 +53,19 @@ const reset = () => {
   console.log('Reset');
 }
 
-const counter = (
-  <div>
-    <h1>Count: {count}</h1>
-    <button className="btn-primary" onClick={addOne}>+1</button>
-    <button className="btn-primary" onClick={minusOne}>-1</button>
-    <button className="btn-primary" onClick={reset}>Reset</button>
-  </div>
-)
+const renderCounterApp = () => {
+  const counter = (
+    <div>
+      <h1>Count: {count}</h1>
+      <button className="btn-primary" onClick={addOne}>+1</button>
+      <button className="btn-primary" onClick={minusOne}>-1</button>
+      <button className="btn-primary" onClick={reset}>Reset</button>
+    </div>
+  )
+
+  return counter;
+  
+}
 
 const appRoot = document.getElementById('app');
 
