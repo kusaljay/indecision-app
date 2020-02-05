@@ -38,12 +38,27 @@ const templateTwo = (
   </div>
 );
 
+let count = 0;
+const addOne = () => {
+  count++;
+  console.log('Increase by one', count);
+}
+const minusOne = () => {
+  console.log('Decrease by one');
+}
+const reset = () => {
+  console.log('Reset');
+}
+
 const counter = (
   <div>
     <h1>Count: {count}</h1>
+    <button className="btn-primary" onClick={addOne}>+1</button>
+    <button className="btn-primary" onClick={minusOne}>-1</button>
+    <button className="btn-primary" onClick={reset}>Reset</button>
   </div>
 )
 
 const appRoot = document.getElementById('app');
 
-ReactDOM.render(templateOne, appRoot);
+ReactDOM.render(counter, appRoot);

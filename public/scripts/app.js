@@ -80,6 +80,18 @@ var templateTwo = React.createElement(
   getLocation(user.location)
 );
 
+var count = 0;
+var addOne = function addOne() {
+  count++;
+  console.log('Increase by one', count);
+};
+var minusOne = function minusOne() {
+  console.log('Decrease by one');
+};
+var reset = function reset() {
+  console.log('Reset');
+};
+
 var counter = React.createElement(
   'div',
   null,
@@ -88,9 +100,24 @@ var counter = React.createElement(
     null,
     'Count: ',
     count
+  ),
+  React.createElement(
+    'button',
+    { className: 'btn-primary', onClick: addOne },
+    '+1'
+  ),
+  React.createElement(
+    'button',
+    { className: 'btn-primary', onClick: minusOne },
+    '-1'
+  ),
+  React.createElement(
+    'button',
+    { className: 'btn-primary', onClick: reset },
+    'Reset'
   )
 );
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(templateOne, appRoot);
+ReactDOM.render(counter, appRoot);
