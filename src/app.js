@@ -36,7 +36,13 @@ const templateTwo = (
     {(user.age && user.age >= 18) && <p>Age: {user.age}</p>}
     {getLocation(user.location)}
   </div>
-); 
+);
+
+const counter = (
+  <div>
+    <h1>Count: {count}</h1>
+  </div>
+)
 
 const appRoot = document.getElementById('app');
 
