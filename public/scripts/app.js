@@ -4,52 +4,91 @@ var app = {
   title: 'Indecision App',
   subtitle: 'Your decisions made easy',
   options: ['One', 'Two']
-
-  /* function onFormSubmit(e) {
-    e.preventDefault();
-  } */
-
-};var onFormSubmit = function onFormSubmit(e) {
-  e.preventDefault();
-  console.log('Form submittd');
 };
 
-var templateOne = React.createElement(
-  'div',
-  { id: 'singleRootElement' },
-  React.createElement(
-    'h1',
-    null,
-    app.title
-  ),
-  app.subtitle && React.createElement(
-    'h2',
-    null,
-    app.subtitle
-  ),
-  app.options && app.options.length > 0 ? React.createElement(
-    'p',
-    null,
-    'Here are your options: ',
-    app.options.map(function (i) {
-      return i;
-    })
-  ) : React.createElement(
-    'p',
-    null,
-    'No options'
-  ),
-  React.createElement(
-    'form',
-    { onSubmit: onFormSubmit },
-    React.createElement('input', { type: 'text', name: 'option' }),
-    React.createElement(
-      'button',
-      null,
-      'Add option'
-    )
-  )
-);
+var handleFormSubmit = function handleFormSubmit(e) {
+  e.preventDefault();
+  var option = e.target.elements.option.value;
+
+  if (option) {
+    app.options.push(option);
+    e.target.elements.option.value = '';
+  }
+  //console.log(app.options);
+  renderFormContents();
+};
+
+var handleRemoveAll = function handleRemoveAll() {
+  app.options.length = 0;
+  //console.log(app.options);
+  renderFormContents();
+};
+
+var handlePickOption = function handlePickOption() {
+  var randomNum = Math.floor(Math.random() * app.options.length);
+  var selectedOption = app.options[randomNum];
+  alert(selectedOption);
+};
 
 var appRoot = document.getElementById('app');
-ReactDOM.render(templateOne, appRoot);
+
+var renderFormContents = function renderFormContents() {
+  var templateOne = React.createElement(
+    'div',
+    null,
+    React.createElement(
+      'h1',
+      null,
+      app.title
+    ),
+    app.subtitle && React.createElement(
+      'h2',
+      null,
+      app.subtitle
+    ),
+    app.options && app.options.length > 0 ? React.createElement(
+      'p',
+      null,
+      'Number of options: ',
+      app.options.length
+    ) : React.createElement(
+      'p',
+      null,
+      'No options'
+    ),
+    React.createElement(
+      'button',
+      { disabled: app.options.length === 0, onClick: handlePickOption },
+      'Pick an option'
+    ),
+    React.createElement(
+      'button',
+      { onClick: handleRemoveAll },
+      'Remove all'
+    ),
+    React.createElement(
+      'ol',
+      null,
+      app.options.map(function (option, index) {
+        return React.createElement(
+          'li',
+          { key: index },
+          option
+        );
+      })
+    ),
+    React.createElement(
+      'form',
+      { onSubmit: handleFormSubmit },
+      React.createElement('input', { type: 'text', name: 'option' }),
+      React.createElement(
+        'button',
+        null,
+        'Add option'
+      )
+    )
+  );
+  ReactDOM.render(templateOne, appRoot);
+};
+
+renderFormContents();

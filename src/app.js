@@ -4,26 +4,56 @@ const app = {
   options: ['One', 'Two']
 }
 
-/* function onFormSubmit(e) {
+const handleFormSubmit = (e) => {
   e.preventDefault();
-} */
+  const option = e.target.elements.option.value;
 
-const onFormSubmit = (e) => {
-  e.preventDefault();
-  console.log('Form submittd');
+  if(option) {
+    app.options.push(option);
+    e.target.elements.option.value = '';
+  }
+  //console.log(app.options);
+  renderFormContents();
 }
 
-const templateOne = (
-  <div id="singleRootElement">
-    <h1>{app.title}</h1>
-    {app.subtitle && <h2>{app.subtitle}</h2>}
-    {(app.options && app.options.length > 0) ? <p>Here are your options: {app.options.map(i => i)}</p> : <p>No options</p>}
-    <form onSubmit={onFormSubmit}>
-      <input type="text" name="option" />
-      <button>Add option</button>
-    </form>
-  </div>
-);
+const handleRemoveAll = () => {
+  app.options.length = 0;
+  //console.log(app.options);
+  renderFormContents();
+}
+
+const handlePickOption = () => {
+  const randomNum = Math.floor(Math.random() * app.options.length);
+  const selectedOption = app.options[randomNum];
+  alert(selectedOption);
+}
 
 const appRoot = document.getElementById('app');
-ReactDOM.render(templateOne, appRoot);
+
+const renderFormContents = () => {
+  const templateOne = (
+    <div>
+      <h1>{app.title}</h1>
+      {app.subtitle && <h2>{app.subtitle}</h2>}
+      {(app.options && app.options.length > 0) ? <p>Number of options: {app.options.length}</p> : <p>No options</p>}
+      <button disabled={app.options.length === 0} onClick={handlePickOption}>Pick an option</button>
+      <button onClick={handleRemoveAll}>Remove all</button>
+      <ol>
+        {app.options.map((option, index) => {
+          return <li key={index}>{option}</li>
+          }
+        )}
+      </ol>
+      <form onSubmit={handleFormSubmit}>
+        <input type="text" name="option" />
+        <button>Add option</button>
+      </form>
+    </div>
+  )
+  ReactDOM.render(templateOne, appRoot);
+}
+
+renderFormContents();
+
+
+
