@@ -12,13 +12,11 @@ const handleFormSubmit = (e) => {
     app.options.push(option);
     e.target.elements.option.value = '';
   }
-  //console.log(app.options);
   renderFormContents();
 }
 
 const handleRemoveAll = () => {
   app.options.length = 0;
-  //console.log(app.options);
   renderFormContents();
 }
 
