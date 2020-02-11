@@ -8,54 +8,54 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-/* ***** Understantd 'this' keyword in functions and objects ***** */
-/* 
-const obj = {
-  name: 'Kusal',
-  getName() {
-    return this.name;
-  }
-}
-
-console.log(obj.getName()); // Returns Kusal. Works for objects as well as ES6 classes.
-
-const getName = obj.getName; // Get a function reference
-console.log(getName()); // Bummer! Returns undefined
-
-const getName = obj.getName.bind(obj); // The fix using 'bind()'
-console.log(getName()); // Returns Kusal
-
-// -- How 'this' is not working in a function by default --
-const func = function() {
-  console.log(return this);
-}
-
-func(); // Returns undefined
-
-*/
-
 var IndecisionApp = function (_React$Component) {
   _inherits(IndecisionApp, _React$Component);
 
-  function IndecisionApp() {
+  function IndecisionApp(props) {
     _classCallCheck(this, IndecisionApp);
 
-    return _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).call(this, props));
+
+    _this.handleRemoveAll = _this.handleRemoveAll.bind(_this);
+    _this.handlePickOption = _this.handlePickOption.bind(_this);
+    _this.state = {
+      title: 'Indecision App',
+      subtitle: 'Let the machine decide',
+      options: ['Thing one', 'Thing two', 'Thing Four']
+    };
+    return _this;
   }
 
   _createClass(IndecisionApp, [{
+    key: 'handleRemoveAll',
+    value: function handleRemoveAll() {
+      this.setState(function () {
+        return {
+          options: []
+        };
+      });
+    }
+  }, {
+    key: 'handlePickOption',
+    value: function handlePickOption() {
+      var randomNum = Math.floor(Math.random() * this.state.options.length);
+      console.log(this.state.options[randomNum]);
+    }
+  }, {
     key: 'render',
     value: function render() {
-      var title = 'This is a Title';
-      var subtitle = 'This is the subtitle';
-      var options = ['Thing one', 'Thing two', 'Thing Four'];
-
       return React.createElement(
         'div',
         null,
-        React.createElement(Header, { title: title, subtitle: subtitle }),
-        React.createElement(Action, null),
-        React.createElement(Options, { options: options }),
+        React.createElement(Header, { title: this.state.title, subtitle: this.state.subtitle }),
+        React.createElement(Action, {
+          hasOptions: this.state.options.length > 0,
+          handlePickOption: this.handlePickOption
+        }),
+        React.createElement(Options, {
+          options: this.state.options,
+          handleRemoveAll: this.handleRemoveAll
+        }),
         React.createElement(AddOption, null)
       );
     }
@@ -107,11 +107,6 @@ var Action = function (_React$Component3) {
   }
 
   _createClass(Action, [{
-    key: 'handlePick',
-    value: function handlePick() {
-      alert('Picked');
-    }
-  }, {
     key: 'render',
     value: function render() {
       return React.createElement(
@@ -119,7 +114,10 @@ var Action = function (_React$Component3) {
         null,
         React.createElement(
           'button',
-          { onClick: this.handlePick },
+          {
+            onClick: this.props.handlePickOption,
+            disabled: !this.props.hasOptions
+          },
           'What should I do?'
         )
       );
@@ -132,22 +130,13 @@ var Action = function (_React$Component3) {
 var Options = function (_React$Component4) {
   _inherits(Options, _React$Component4);
 
-  function Options(props) {
+  function Options() {
     _classCallCheck(this, Options);
 
-    var _this4 = _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).call(this, props));
-
-    _this4.handleRemoveAll = _this4.handleRemoveAll.bind(_this4);
-    return _this4;
+    return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
   }
 
   _createClass(Options, [{
-    key: 'handleRemoveAll',
-    value: function handleRemoveAll() {
-      //alert('Removed all');
-      console.log(this.props.options);
-    }
-  }, {
     key: 'render',
     value: function render() {
       return React.createElement(
@@ -155,7 +144,7 @@ var Options = function (_React$Component4) {
         null,
         React.createElement(
           'button',
-          { onClick: this.handleRemoveAll },
+          { onClick: this.props.handleRemoveAll },
           'Remove all'
         ),
         this.props.options.map(function (option, i) {

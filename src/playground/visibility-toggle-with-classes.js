@@ -1,12 +1,10 @@
 class Toggle extends React.Component {
   constructor(props) {
     super(props);
-
     this.handleToggleVisibility = this.handleToggleVisibility.bind(this);
     this.state = {
       visibility: false
     }
-
   }
 
   handleToggleVisibility() {
