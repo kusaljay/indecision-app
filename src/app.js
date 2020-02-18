@@ -1,4 +1,4 @@
-/* **************************************
+/****************************************
 ******** IndecisionApp Component ********
 *****************************************/
 class IndecisionApp extends React.Component {
@@ -65,7 +65,9 @@ class IndecisionApp extends React.Component {
         this.setState(() => ({ options  }));
       }
     }
-    catch (err) {}
+    catch (err) {
+      
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -76,7 +78,7 @@ class IndecisionApp extends React.Component {
 
   }
 
-  componentWillUnmount() {
+  componentWillUnmount(prevProps, prevState) {
     console.log('componentWillUnmount!');
   }
 
@@ -104,7 +106,7 @@ IndecisionApp.defaultProps = {
 }
  */
 
-/* *******************************
+/*********************************
 ******** Header Component ********
 **********************************/
 const Header = (props) => {
