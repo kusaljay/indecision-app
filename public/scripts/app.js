@@ -8,6 +8,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+/* **************************************
+******** IndecisionApp Component ********
+*****************************************/
 var IndecisionApp = function (_React$Component) {
   _inherits(IndecisionApp, _React$Component);
 
@@ -31,7 +34,7 @@ var IndecisionApp = function (_React$Component) {
   _createClass(IndecisionApp, [{
     key: 'handleRemoveAll',
     value: function handleRemoveAll() {
-      // ***** Explicit return in the updater function *****
+      //--- Explicit return in the updater function ---
       /* 
       this.setState(() => {
         return {
@@ -68,17 +71,18 @@ var IndecisionApp = function (_React$Component) {
       } else if (this.state.options.indexOf(option) > -1) {
         return 'This option already exists';
       }
-      // ***** Explicit return in the updater function *****
+
+      this.setState(function (prevState) {
+        return { options: prevState.options.concat([option]) };
+      }); // One liner
+
+      //--- Explicit return in the updater function ---
       /*
       this.setState((prevState) => {
         return {
           options: prevState.options.concat([option])
         };
       }); */
-
-      this.setState(function (prevState) {
-        return { options: prevState.options.concat([option]) };
-      }); // One liner
     }
   }, {
     key: 'componentDidMount',
@@ -136,6 +140,10 @@ IndecisionApp.defaultProps = {
 }
  */
 
+/* *******************************
+******** Header Component ********
+**********************************/
+
 
 var Header = function Header(props) {
   return React.createElement(
@@ -157,7 +165,7 @@ var Header = function Header(props) {
 Header.defaultProps = {
   title: 'Indecision App'
 
-  // ***** Explicit return in the updater function *****
+  //--- Header as a class-based component ---
   /*
   class Header extends React.Component {
     render() {
@@ -170,8 +178,11 @@ Header.defaultProps = {
       )
     }
   }
-   */
+  */
 
+  /*********************************
+  ******** Action Component ********
+  **********************************/
 };var Action = function Action(props) {
   return React.createElement(
     'div',
@@ -187,7 +198,8 @@ Header.defaultProps = {
   );
 };
 
-/* ***** Action as a class-based component *****
+//--- Action as a class-based component ---
+/* 
 class Action extends React.Component {
   render() {
     return (
@@ -200,8 +212,12 @@ class Action extends React.Component {
       </div>
     )
   }
-} */
+}
+*/
 
+/**********************************
+******** Options Component ********
+**********************************/
 var Options = function Options(props) {
   return React.createElement(
     'div',
@@ -226,7 +242,7 @@ var Options = function Options(props) {
   );
 };
 
-// ***** Options as a class-based component *****
+//--- Options as a class-based component ---
 // class Options extends React.Component { 
 //   render() {
 //     return (
@@ -241,6 +257,9 @@ var Options = function Options(props) {
 //   }
 // }
 
+/**********************************
+******** Option Component ********
+**********************************/
 var Option = function Option(props) {
   return React.createElement(
     'div',
@@ -256,14 +275,20 @@ var Option = function Option(props) {
   );
 };
 
-/* ***** Option as a class component *****
+//--- Option as a class component ---
+/*
 class Option extends React.Component {
   render() {
     return (
       <div>{this.props.optionText}</div>
     );
   }
-} */
+} 
+*/
+
+/************************************
+******** AddOption Component ********
+*************************************/
 
 var AddOption = function (_React$Component2) {
   _inherits(AddOption, _React$Component2);
@@ -287,20 +312,23 @@ var AddOption = function (_React$Component2) {
 
       var addedOption = e.target.elements.option.value.trim();
       var error = this.props.handleAddOption(addedOption);
-      /* ***** Explicit return in the update function
+
+      if (!error) {
+        e.target.elements.option.value = '';
+      }
+
+      this.setState(function () {
+        return { error: error };
+      }); //One liner
+
+      //--- Explicit return in the update function ---
+      /*
       this.setState(() => {
         return {
           error: error  // { error }
         }
       });
       */
-      this.setState(function () {
-        return { error: error };
-      }); //One liner
-
-      if (!error) {
-        e.target.elements.option.value = '';
-      }
     }
   }, {
     key: 'render',

@@ -33,6 +33,14 @@ class Counter extends React.Component {
       }
     });
   }
+
+  componentDidMount() {
+    console.log('fetch data here');
+  }
+  
+  componentDidUpdate() {
+    console.log('save data here');
+  }
   
   render(){
     return(
@@ -50,5 +58,5 @@ Counter.defaultProps = {
   count: 0
 };
 
-ReactDOM.render(<Counter count={100} />, document.getElementById('app'));
+ReactDOM.render(<Counter />, document.getElementById('app'));
 

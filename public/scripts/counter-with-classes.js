@@ -53,6 +53,16 @@ var Counter = function (_React$Component) {
       });
     }
   }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      console.log('fetch data here');
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      console.log('save data here');
+    }
+  }, {
     key: 'render',
     value: function render() {
       return React.createElement(
@@ -90,4 +100,4 @@ Counter.defaultProps = {
   count: 0
 };
 
-ReactDOM.render(React.createElement(Counter, { count: 100 }), document.getElementById('app'));
+ReactDOM.render(React.createElement(Counter, null), document.getElementById('app'));

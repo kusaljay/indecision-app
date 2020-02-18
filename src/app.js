@@ -1,3 +1,6 @@
+/* **************************************
+******** IndecisionApp Component ********
+*****************************************/
 class IndecisionApp extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +16,7 @@ class IndecisionApp extends React.Component {
   }
 
   handleRemoveAll() {
-    // ***** Explicit return in the updater function *****
+    //--- Explicit return in the updater function ---
     /* 
     this.setState(() => {
       return {
@@ -41,15 +44,16 @@ class IndecisionApp extends React.Component {
     } else if (this.state.options.indexOf(option) > -1) {
       return 'This option already exists';
     }
-    // ***** Explicit return in the updater function *****
+
+    this.setState((prevState) => ({options: prevState.options.concat([option])})); // One liner
+
+    //--- Explicit return in the updater function ---
     /*
     this.setState((prevState) => {
       return {
         options: prevState.options.concat([option])
       };
-    }); */
-
-    this.setState((prevState) => ({options: prevState.options.concat([option])})); // One liner
+    }); */   
   }
 
   componentDidMount() {
@@ -99,6 +103,10 @@ IndecisionApp.defaultProps = {
   options: []
 }
  */
+
+/* *******************************
+******** Header Component ********
+**********************************/
 const Header = (props) => {
   return (
     <div>
@@ -112,7 +120,7 @@ Header.defaultProps = {
   title: 'Indecision App'
 }
 
-// ***** Explicit return in the updater function *****
+//--- Header as a class-based component ---
 /*
 class Header extends React.Component {
   render() {
@@ -125,8 +133,11 @@ class Header extends React.Component {
     )
   }
 }
- */
+*/
 
+/*********************************
+******** Action Component ********
+**********************************/
 const Action = (props) => {
   return (
     <div>
@@ -139,7 +150,8 @@ const Action = (props) => {
   );
 }
 
-/* ***** Action as a class-based component *****
+//--- Action as a class-based component ---
+/* 
 class Action extends React.Component {
   render() {
     return (
@@ -152,8 +164,12 @@ class Action extends React.Component {
       </div>
     )
   }
-} */
+}
+*/
 
+/**********************************
+******** Options Component ********
+**********************************/
 const Options = (props) => {
   return (
     <div>
@@ -171,7 +187,7 @@ const Options = (props) => {
   );
 }
 
-// ***** Options as a class-based component *****
+//--- Options as a class-based component ---
 // class Options extends React.Component { 
 //   render() {
 //     return (
@@ -186,6 +202,9 @@ const Options = (props) => {
 //   }
 // }
 
+/**********************************
+******** Option Component ********
+**********************************/
 const Option = (props) => {
   return (
     <div>
@@ -195,15 +214,20 @@ const Option = (props) => {
   );
 }
 
-/* ***** Option as a class component *****
+//--- Option as a class component ---
+/*
 class Option extends React.Component {
   render() {
     return (
       <div>{this.props.optionText}</div>
     );
   }
-} */
+} 
+*/
 
+/************************************
+******** AddOption Component ********
+*************************************/
 class AddOption extends React.Component {
   constructor(props) {
     super(props);
@@ -218,19 +242,21 @@ class AddOption extends React.Component {
 
     const addedOption = e.target.elements.option.value.trim();
     const error = this.props.handleAddOption(addedOption);
-    /* ***** Explicit return in the update function
+    
+    if(!error) {
+      e.target.elements.option.value = '';
+    }
+    
+    this.setState(() => ({ error })); //One liner
+
+    //--- Explicit return in the update function ---
+    /*
     this.setState(() => {
       return {
         error: error  // { error }
       }
     });
     */
-    this.setState(() => ({ error })); //One liner
-
-    if(!error) {
-      e.target.elements.option.value = '';
-    }
-    
   }
   
   render() {
