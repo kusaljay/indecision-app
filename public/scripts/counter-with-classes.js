@@ -55,12 +55,22 @@ var Counter = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      console.log('fetch data here');
+      try {
+        var json = localStorage.getItem('count');
+        var count = JSON.parse(json);
+
+        if (count !== this.state.count) {
+          this.setState({ count: count });
+        }
+      } catch (err) {}
     }
   }, {
     key: 'componentDidUpdate',
-    value: function componentDidUpdate() {
-      console.log('save data here');
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (prevState.count !== this.state.count) {
+        var json = JSON.stringify(this.state.count);
+        localStorage.setItem('count', json);
+      }
     }
   }, {
     key: 'render',
