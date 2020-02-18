@@ -25,8 +25,8 @@ var IndecisionApp = function (_React$Component) {
     _this.handleRemoveOption = _this.handleRemoveOption.bind(_this);
     _this.state = {
       subtitle: 'Let the machine decide',
-      // options: props.options
       options: []
+      // options: props.options
     };
     return _this;
   }
@@ -34,17 +34,17 @@ var IndecisionApp = function (_React$Component) {
   _createClass(IndecisionApp, [{
     key: 'handleRemoveAll',
     value: function handleRemoveAll() {
+      this.setState(function () {
+        return { options: [] };
+      }); // One liner
       //--- Explicit return in the updater function ---
       /* 
       this.setState(() => {
         return {
           options: []
         }
-      }); */
-
-      this.setState(function () {
-        return { options: [] };
-      }); // One liner
+      }); 
+      */
     }
   }, {
     key: 'handleRemoveOption',

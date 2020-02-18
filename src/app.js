@@ -10,21 +10,21 @@ class IndecisionApp extends React.Component {
     this.handleRemoveOption = this.handleRemoveOption.bind(this);
     this.state = {
       subtitle: 'Let the machine decide',
-      // options: props.options
       options: []
+      // options: props.options
     }
   }
 
   handleRemoveAll() {
+    this.setState(() => ({ options: [] })); // One liner
     //--- Explicit return in the updater function ---
     /* 
     this.setState(() => {
       return {
         options: []
       }
-    }); */
-
-    this.setState(() => ({ options: [] })); // One liner
+    }); 
+    */
   }
 
   handleRemoveOption(optionToRemove) {
