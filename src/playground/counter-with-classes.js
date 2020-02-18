@@ -35,17 +35,13 @@ class Counter extends React.Component {
   }
 
   componentDidMount() {
-    try {
-      const json = localStorage.getItem('count');
-      const count = JSON.parse(json);
+    const stringCount = localStorage.getItem('count');
+    const count = parseInt(stringCount, 10);
 
-      if(count !== this.state.count) {
-        this.setState(({ count }));
-      }
-    } catch(err) {
-
+    if(!isNaN(count)) {
+      this.setState(({ count }));
     }
-  }
+}
   
   componentDidUpdate(prevProps, prevState) {
     if (prevState.count !== this.state.count) {
@@ -53,7 +49,7 @@ class Counter extends React.Component {
       localStorage.setItem('count', json);
     }
   }
-  
+
   render(){
     return(
       <div>

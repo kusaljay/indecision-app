@@ -8,7 +8,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-/* **************************************
+/****************************************
 ******** IndecisionApp Component ********
 *****************************************/
 var IndecisionApp = function (_React$Component) {
@@ -108,7 +108,7 @@ var IndecisionApp = function (_React$Component) {
     }
   }, {
     key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
+    value: function componentWillUnmount(prevProps, prevState) {
       console.log('componentWillUnmount!');
     }
   }, {
@@ -140,7 +140,7 @@ IndecisionApp.defaultProps = {
 }
  */
 
-/* *******************************
+/*********************************
 ******** Header Component ********
 **********************************/
 

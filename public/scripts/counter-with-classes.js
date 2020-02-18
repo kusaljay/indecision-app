@@ -55,14 +55,12 @@ var Counter = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      try {
-        var json = localStorage.getItem('count');
-        var count = JSON.parse(json);
+      var stringCount = localStorage.getItem('count');
+      var count = parseInt(stringCount, 10);
 
-        if (count !== this.state.count) {
-          this.setState({ count: count });
-        }
-      } catch (err) {}
+      if (!isNaN(count)) {
+        this.setState({ count: count });
+      }
     }
   }, {
     key: 'componentDidUpdate',
