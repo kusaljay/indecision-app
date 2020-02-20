@@ -6,8 +6,9 @@
   "author": "Kusal",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --watch",
-    "serve": "live-server --port=8888 public"
+    "build": "webpack",
+    "serve": "live-server --port=8888 public",
+    "dev-serve": "webpack-dev-server"
   },
   "dependencies": {
     "@babel/cli": "^7.8.4",
@@ -21,7 +22,8 @@
     "react-dom": "^16.12.0",
     "validator": "^12.2.0",
     "webpack": "^4.41.6",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
   },
   "devDependencies": {}
 }
