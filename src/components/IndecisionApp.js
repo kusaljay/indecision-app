@@ -3,11 +3,13 @@ import Header from './Header';
 import Action from './Action';
 import Options from './Options';
 import AddOption from './AddOption'; 
+import OptionModal from './OptionModal';
 
 class IndecisionApp extends React.Component {
   state = {
     subtitle: 'Let the machine decide',
-    options: []
+    options: [],
+    selectedOption: undefined
   }
 
   handleRemoveAll = () => {
@@ -22,7 +24,11 @@ class IndecisionApp extends React.Component {
 
   handlePickOption = () => {
     const randomNum = Math.floor(Math.random() * this.state.options.length);
-    alert(this.state.options[randomNum]);
+    //alert(this.state.options[randomNum]);
+    
+    this.setState(() => ({
+      selectedOption: this.state.options[randomNum]
+    }));
   };
 
   handleAddOption = (option) => {
@@ -32,10 +38,16 @@ class IndecisionApp extends React.Component {
       return 'This option already exists';
     }
 
-    this.setState((prevState) => (
-      {options: prevState.options.concat([option])})
-    );
+    this.setState((prevState) => ({
+      options: prevState.options.concat([option])
+    }));
   };
+
+  handleCloseModal = () => {
+    this.setState(() => ({
+      selectedOption: undefined
+    }));
+  }
 
   componentDidMount() {
     try {
@@ -76,6 +88,7 @@ class IndecisionApp extends React.Component {
           handleRemoveOption={this.handleRemoveOption}
         />
         <AddOption handleAddOption={this.handleAddOption} />
+        <OptionModal selectedOption={this.state.selectedOption} handleCloseModal={this.handleCloseModal} />
       </div>
     )
   }
