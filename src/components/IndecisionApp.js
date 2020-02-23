@@ -7,24 +7,24 @@ import OptionModal from './OptionModal';
 
 class IndecisionApp extends React.Component {
   state = {
-    subtitle: 'Let the machine decide',
     options: [],
     selectedOption: undefined
   }
 
   handleRemoveAll = () => {
-    this.setState(() => ({ options: [] })); // One liner
+    this.setState(() => ({ 
+      options: [] 
+    }));
   };
 
   handleRemoveOption = (optionToRemove) => {
     this.setState((prevState) => ({ 
-      options: prevState.options.filter((option) => option !== optionToRemove ) // One liner i.e. implicit return
+      options: prevState.options.filter((option) => option !== optionToRemove )
     }));
   };
 
   handlePickOption = () => {
     const randomNum = Math.floor(Math.random() * this.state.options.length);
-    //alert(this.state.options[randomNum]);
     
     this.setState(() => ({
       selectedOption: this.state.options[randomNum]

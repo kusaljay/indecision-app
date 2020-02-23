@@ -7,5 +7,4 @@ const Option = (props) => (
   </div>
 );
 
-
 export default Option;
